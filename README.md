@@ -60,7 +60,7 @@ Nadeem et al. (2024) remarked the growing trend of integrating IoT into posture 
 
 Nadeem et al. (2024) highlight the primary challenges that different technologies for sitting posture monitoring system face, thus suggesting future research directions. For sensor-based systems, the paper point out the high cost, intrusiveness/discomfort, and requring specialized set-up as the main shortcomings, encouring future research to develop less intrusive and more ergonomic sensors (e.g., fabric-based or integrated into furniture), focus on low-power, cost-effective designs, and explore sensor fusion to combine strengths of different sensor types. For image-based systems, the challenges mentioned include dependency on favorable environmental conditions, such as consistent lighting; privacy concerns due to continuous video recording; as well as high computational demands for real-time processing and feature extraction. To this end, the paper suggest future research should focus on utilizing advanced AI techniques, such as deep learning, to improve robustness against lighting and occlusions and adopt privacy-preserving methods, like processing data on local devices or using anonymized features.
 
-**2.5. References**
+### **3. References**
 
 Reference Here.
 
