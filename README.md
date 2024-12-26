@@ -62,6 +62,8 @@ Nadeem et al. (2024) highlight the primary challenges that different technologie
 
 ## **Problem statement and Contributions**
 
+## **Project details**
+
 
 
 
