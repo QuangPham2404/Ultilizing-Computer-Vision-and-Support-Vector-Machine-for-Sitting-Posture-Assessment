@@ -4,7 +4,7 @@
 
 [Abstract here]
 
-## **Preliminary literature review**
+## **I. Preliminary literature review**
 
 ### **1. Current situation on bad posture**
 
@@ -64,9 +64,17 @@ Nadeem et al. (2024) highlight the primary challenges that different technologie
 
 Reference Here.
 
-## **Problem statement and Contributions**
+## **II. Problem statement and Contributions**
 
-## **Project details**
+## **III. Project details**
+
+### **1. Classification of "normal" and "abnormal" posture**
+
+Since this project concerns only with the binary classification of postures (e.g. "normal" and "abnormal"), it is essential to establish a detailed definition of each posture type. In this project, we combine the classification technique of Ding Z. et al. (2019) and the definition of "good posture" in the work of Nadeem M. et al. (2024) and Kapoor R. et al. (2022).
+
+Ding Z. et al. (2019) first classify different postures into 30 posture classes as combinations of the orientiation of the trunk (supine, erect, bend, and prone), the neck (look ahead, look down), and sitting orientations (turn left, lean left, middle, lean right, turn right, and turn back). Subsequently, they grouped various among of the 30 posture types into 2 classes: low-risk, and high-risk (Figure 1). The paper offers 2 more ways to classify postures, but this project will adopt this technique.
+
+
 
 
 
