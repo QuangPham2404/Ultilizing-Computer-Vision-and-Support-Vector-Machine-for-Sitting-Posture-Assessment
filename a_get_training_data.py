@@ -168,7 +168,7 @@ with mp_pose.Pose(
                 x_nose_shoulders_left_calibrated = get_x_nose_shoulders_left(landmarks)
                 x_nose_shoulders_right_calibrated = get_x_nose_shoulders_right(landmarks)
                 x_nose_elbows_left_calibrated = get_x_nose_elbows_left(landmarks)
-                x_nose_elbows_right_calibrated = get_x_nose_elbows_left(landmarks)
+                x_nose_elbows_right_calibrated = get_x_nose_elbows_right(landmarks)
 
                 if key == ord("2"):
                     calibrated_values.append(y_nose_shoulders_calibrated)
@@ -207,10 +207,18 @@ with mp_pose.Pose(
 
         # Break loop on 'Esc' key
         if key == ord("q"):
-            name = input("Enter the name of the participant: ")
-            write_list_to_file(correct_posture_data, f"{name}_correct_posture_data.txt")
-            write_list_to_file(incorrect_posture_data, f"{name}_incorrect_posture_data.txt")
             break
+
 
 video_stream.release()
 cv.destroyAllWindows()
+
+# write the data to files
+name = input("Enter the name of the participant: ")
+write_list_to_file(correct_posture_data + incorrect_posture_data, f"{name}_data.txt")
+
+correct_posture_tag_list = [0] * len(correct_posture_data)
+incorrect_posture_tag_list = [1] * len(incorrect_posture_data)
+with open(f"{name}_tag.txt", 'w') as file:
+    for element in correct_posture_tag_list + incorrect_posture_tag_list:
+        file.write(str(element) + '\n')
