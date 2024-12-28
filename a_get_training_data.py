@@ -1,6 +1,7 @@
 import cv2 as cv
 import mediapipe as mp
 import numpy as np
+import os
 
 # Load the tools
 mp_pose = mp.solutions.pose
@@ -109,6 +110,45 @@ def write_list_to_file(input_list, file_path):
         print(f"List successfully written to {file_path}")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+
+def combine_files(input_dir, output_data_file, output_tag_file):
+    """
+    Combines all files ending with '_data.txt' into a single file and all files 
+    ending with '_tag.txt' into another single file.
+
+    Parameters:
+    - input_dir (str): Directory containing the input files.
+    - output_data_file (str): Path for the combined data file.
+    - output_tag_file (str): Path for the combined tag file.
+
+    Returns:
+    None
+    """
+    data_lines = []
+    tag_lines = []
+
+    # Iterate through files in the directory
+    for filename in os.listdir(input_dir):
+        file_path = os.path.join(input_dir, filename)
+
+        if filename.endswith("_data.txt"):
+            with open(file_path, 'r') as f:
+                data_lines.extend(f.readlines())
+        elif filename.endswith("_tag.txt"):
+            with open(file_path, 'r') as f:
+                tag_lines.extend(f.readlines())
+
+    # Write combined data lines to the output data file
+    with open(output_data_file, 'w') as f:
+        f.writelines(data_lines)
+
+    # Write combined tag lines to the output tag file
+    with open(output_tag_file, 'w') as f:
+        f.writelines(tag_lines)
+
+    print(f"Combined data written to {output_data_file}")
+    print(f"Combined tags written to {output_tag_file}")
 
 
 # Create the Mediapipe Pose tool
@@ -222,3 +262,9 @@ incorrect_posture_tag_list = [1] * len(incorrect_posture_data)
 with open(f"{name}_tag.txt", 'w') as file:
     for element in correct_posture_tag_list + incorrect_posture_tag_list:
         file.write(str(element) + '\n')
+
+combine_files(
+    input_dir="./input_files",
+    output_data_file="combined_data.txt",
+    output_tag_file="combined_tags.txt"
+)
