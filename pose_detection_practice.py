@@ -17,12 +17,23 @@ video_stream = cv.VideoCapture(0)
 
 #constant
 calibration_in_process = True
+
 y_nose_shoulders_calibrated = 0
 y_nose_elbows_calibrated = 0
 y_shoulders_elbows_calibrated = 0
-x_nose_shoulders_calibrated = 0
-x_nose_shoulders_elbows_calibrated = 0
+x_nose_shoulders_left_calibrated = 0
+x_nose_shoulders_right_calibrated = 0
+x_nose_shoulders_elbows_left_calibrated = 0
+x_nose_shoulders_elbows_right_calibrated = 0
 calibrated_values = []
+
+ratio_y_nose_shoulders_list = []
+ratio_y_nose_elbows_list = []
+ratio_y_shoulders_elbows_list = []
+ratio_x_nose_shoulders_left_list = []
+ratio_x_nose_shoulders_right_list = []
+ratio_x_nose_elbows_left_list = []
+ratio_x_nose_elbows_right_list = []
 
 
 #functions to calculate values for posture classification
@@ -57,25 +68,33 @@ def get_y_shoulders_elbows(landmarks):
     avg_distance_y_shoulders_elbows = round((distance_y_shoulder1_elbow1 + distance_y_shoulder2_elbow2)/2, 8)
     return avg_distance_y_shoulders_elbows
 
-# Function to calculate the average x distance of the nose and shoulders
-def get_x_nose_shoulders(landmarks):
+# Function to calculate the average x distance of the nose and shoulders on the left side
+def get_x_nose_shoulders_left(landmarks):
     nose_x = landmarks[0][0]
     shoulder1_x = landmarks[1][0]
-    shoulder2_x = landmarks[2][0]
     distance_x_nose_shoulder1 = abs(nose_x - shoulder1_x)
-    distance_x_nose_shoulder2 = abs(nose_x - shoulder2_x)
-    avg_distance_x_nose_shoulders = round((distance_x_nose_shoulder1 + distance_x_nose_shoulder2)/2, 8)
-    return avg_distance_x_nose_shoulders
+    return round(distance_x_nose_shoulder1, 8)
 
-# Function to calculate the average x distance of the nose and shoulders
-def get_x_nose_elbows(landmarks):
+# Function to calculate the average x distance of the nose and shoulders on the right side
+def get_x_nose_shoulders_right(landmarks):
+    nose_x = landmarks[0][0]
+    shoulder2_x = landmarks[2][0]
+    distance_x_nose_shoulder2 = abs(nose_x - shoulder2_x)
+    return round(distance_x_nose_shoulder2, 8)
+
+# Function to calculate the average x distance of the nose and shoulders on the left side
+def get_x_nose_elbows_left(landmarks):
     nose_x = landmarks[0][0]
     elbow1_x = landmarks[3][0]
-    elbow2_x = landmarks[4][0]
     distance_x_nose_elbow1 = abs(nose_x - elbow1_x)
+    return round(distance_x_nose_elbow1, 8)
+
+# Function to calculate the average x distance of the nose and shoulders on the right side
+def get_x_nose_elbows_right(landmarks):
+    nose_x = landmarks[0][0]
+    elbow2_x = landmarks[4][0]
     distance_x_nose_elbow2 = abs(nose_x - elbow2_x)
-    avg_distance_x_nose_elbows = round((distance_x_nose_elbow1 + distance_x_nose_elbow2)/2, 8)
-    return avg_distance_x_nose_elbows
+    return round(distance_x_nose_elbow2, 8)
 
 
 # Create the Mediapipe Pose tool
@@ -132,15 +151,19 @@ with mp_pose.Pose(
                 y_nose_shoulders_calibrated = get_y_nose_shoulders(landmarks)
                 y_nose_elbows_calibrated = get_y_nose_elbows(landmarks)
                 y_shoulders_elbows_calibrated = get_y_shoulders_elbows(landmarks)
-                x_nose_shoulders_calibrated = get_x_nose_shoulders(landmarks)
-                x_nose_elbows_calibrated = get_x_nose_elbows(landmarks)
+                x_nose_shoulders_left_calibrated = get_x_nose_shoulders_left(landmarks)
+                x_nose_shoulders_right_calibrated = get_x_nose_shoulders_right(landmarks)
+                x_nose_elbows_left_calibrated = get_x_nose_elbows_left(landmarks)
+                x_nose_elbows_right_calibrated = get_x_nose_elbows_left(landmarks)
 
                 if key == ord("1"):
                     calibrated_values.append(y_nose_shoulders_calibrated)
                     calibrated_values.append(y_nose_elbows_calibrated)
                     calibrated_values.append(y_shoulders_elbows_calibrated)
-                    calibrated_values.append(x_nose_shoulders_calibrated)
-                    calibrated_values.append(x_nose_shoulders_calibrated)
+                    calibrated_values.append(x_nose_shoulders_left_calibrated)
+                    calibrated_values.append(x_nose_shoulders_right_calibrated)
+                    calibrated_values.append(x_nose_elbows_left_calibrated)
+                    calibrated_values.append(x_nose_elbows_right_calibrated)
                     calibration_in_process = False
                     print(calibrated_values)
 
@@ -149,14 +172,31 @@ with mp_pose.Pose(
                 ratio_y_nose_shoulders = round(get_y_nose_shoulders(landmarks)/calibrated_values[0], 4)
                 ratio_y_nose_elbows = round(get_y_nose_elbows(landmarks)/calibrated_values[1], 4)
                 ratio_y_shoulders_elbows = round(get_y_shoulders_elbows(landmarks)/calibrated_values[2], 4)
-                ratio_x_nose_shoulders = round(get_x_nose_shoulders(landmarks)/calibrated_values[3], 4)
-                ratio_x_nose_elbows = round(get_x_nose_elbows(landmarks)/calibrated_values[4], 4)
+                ratio_x_nose_shoulders_left = round(get_x_nose_shoulders_left(landmarks)/calibrated_values[3], 4)
+                ratio_x_nose_shoulders_right = round(get_x_nose_shoulders_right(landmarks)/calibrated_values[4], 4)
+                ratio_x_nose_elbows_left = round(get_x_nose_elbows_left(landmarks)/calibrated_values[5], 4)
+                ratio_x_nose_elbows_right = round(get_x_nose_elbows_right(landmarks)/calibrated_values[6], 4)
+
+                ratio_y_nose_shoulders_list.append(ratio_y_nose_shoulders)
+                ratio_y_nose_elbows_list.append(ratio_y_nose_elbows)
+                ratio_y_shoulders_elbows_list.append(ratio_y_shoulders_elbows)
+                ratio_x_nose_shoulders_left_list.append(ratio_x_nose_shoulders_left)
+                ratio_x_nose_shoulders_right_list.append(ratio_x_nose_shoulders_right)
+                ratio_x_nose_elbows_left_list.append(ratio_x_nose_elbows_left)
+                ratio_x_nose_elbows_right_list.append(ratio_x_nose_elbows_right)
 
         # Show the annotated frame
         cv.imshow(win_name, frame)
 
         # Break loop on 'Esc' key
         if key == ord("q"):
+            print(ratio_y_nose_shoulders_list)
+            print(ratio_y_nose_elbows_list)
+            print(ratio_y_shoulders_elbows_list)
+            print(ratio_x_nose_shoulders_left_list)
+            print(ratio_x_nose_shoulders_right_list)
+            print(ratio_x_nose_elbows_left_list)
+            print(ratio_x_nose_elbows_right_list)
             break
 
 video_stream.release()
