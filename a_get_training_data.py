@@ -264,7 +264,7 @@ with open(f"{name}_tag.txt", 'w') as file:
         file.write(str(element) + '\n')
 
 combine_files(
-    input_dir="./input_files",
+    input_dir=r"C:\Users\STVN\Desktop\PYTHON\pose_detection",
     output_data_file="combined_data.txt",
     output_tag_file="combined_tags.txt"
 )
