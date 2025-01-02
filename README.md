@@ -45,7 +45,7 @@ There are 3 main programs used for training and deploying the Support Vector Mac
 
 The remaning files are for experimenting when developing the approach:
 1. ***pose_detection_practice.py***: This program is for experimenting with MediaPipe Pose Landmarker Model and different feature data values for sitting posture classification.
-2. ***visualize_data.py***: This program is for experimenting with different feature data values by exmaining their characteristics corresponding to the change in sitting posture.
+2. ***data_visualization.py***: This program is for experimenting with different feature data values by exmaining their characteristics corresponding to the change in sitting posture.
 
 ## III. Progress Update
 
