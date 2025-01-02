@@ -35,7 +35,6 @@ This project uses the following libraries/packages:
 5. numpy library: for handling SVM input vectors
 6. os library: for navigating and making changes in directory (combine files, etc)
 
-### 2. Program files
 
 
 
