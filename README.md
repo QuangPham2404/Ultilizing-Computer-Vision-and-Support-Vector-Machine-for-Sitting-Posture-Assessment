@@ -35,6 +35,22 @@ This project uses the following libraries/packages:
 5. numpy library: for handling SVM input vectors
 6. os library: for navigating and making changes in directory (combine files, etc)
 
+### 2. Programs details
+
+There are 3 main programs used for training and deploying the Support Vector Machine (SVM) for real-time sitting posture classification.
+
+1. ***a_get_training_data.py***: This program is for collecting and preparing training and testing data for the Support Vector Machine (SVM) model used in sitting posture classification. When run for each subject participating in the study, the script extracts feature values and saves them in a .txt file named _[Subject_name]_data.tx_t. Simultaneously, it generates a corresponding .txt file containing the labels (0s for correct posture, 1s for incorrect posture), named _[Subject_name]_tag.txt_. For example, the files _Quang_data.txt_ and _Quang_tag.txt_ represent the feature data and labels for a subject named Quang. After processing individual subjects, the program automatically consolidates all the data files and tag files into two comprehensive .txt files: _combined_data.txt_ and _combined_tag.txt_. These combined files serve as the complete dataset for training and testing the SVM model, ensuring an efficient and organized workflow for data
+2. ***b_get_SVM.py***: This program is for training the SVM model and saving it as a .pkl file for further usage. After completing the training data files with _a_get_training_data.py_, run this program to train the SVM.
+3. ***c_classify_posture.py***: This program is for deploying the SVM on the laptop's webcam to classify sitting posture as "correct" or "incorrect" in real-time. If "incorrect" posture is detected for 10s straight, a Window pop-up warning message will be created. If the user does not fix their posture for the next 5s, another pop-up warning message will be created until they fix their sitting posture to "correct."
+
+The remaning files are for experimenting when developing the approach:
+1. ***pose_detection_practice.py***: This program is for experimenting with MediaPipe Pose Landmarker Model and different feature data values for sitting posture classification.
+2. ***visualize_data.py***: This program is for experimenting with different feature data values by exmaining their characteristics corresponding to the change in sitting posture.
+
+## III. Progress Update
+
+The project is still in development. Currently we are expanding the training dataset to train the SVM model. For the detailed timeline for future plans please refer to the [Progress Report](https://docs.google.com/document/d/19jx68Y5_j-Ulr1dCGZ0WGKnvGe7lnnX2iYIdK7WnP-8/edit?tab=t.0).
+
 
 
 
