@@ -4,6 +4,8 @@
 
 Poor sitting posture is an urgent problem on a global scale, driven by the rising prevalence of sedentary activities such as prolonged computer use. Poor sitting posture leads to work-related musculoskeletal disorders such as carpal tunnel, back injury, and back pain; cardiovascular diseases; and even permanent health damage, resulting in expensive treatments for both employers and employees. Many posture monitoring technologies rely on pressure and inertia sensors, and while these instruments are accurate, they are intrusive, expensive, and require a specialized setup, making them unsuitable for widespread deployment. Posture monitoring using cameras offers an unintrusive, cost-effective, and convenient solution while maintaining high accuracy; however, current methods are challenged by high computational demands, sensitivity to environmental conditions, and inconvenient camera placements. This paper presents a novel camera-based approach, designed to be deployed on a laptop using the built-in camera without any additional setup. First, we synthesize previous works to develop a comprehensive classification system for “correct” and “incorrect” posture. Subsequently, four numerical ratios between distances of key joint coordinates calibrated for individual users are extracted as input data for a Support Vector Machine (SVM) model to perform posture classification. By using numerical data rather than images of depth maps as input for posture-classification models, the proposed method significantly reduces the computational requirement as well as minimizes the effect of environmental variables. This approach addresses existing challenges in camera-based posture monitoring and offers a practical, efficient solution for real-time sitting posture assessment. Furthermore, this paper also discusses utilizing the lightweight computational load of the SVM model for deployment on edge-AI modules, enabling a portable and robust sitting posture assessment system.
 
+**Progress Report Link:** [LINK](https://docs.google.com/document/d/19jx68Y5_j-Ulr1dCGZ0WGKnvGe7lnnX2iYIdK7WnP-8/edit?tab=t.0)
+
 ## **PROJECT DETAILS**
 
 ## **I. Problem statement and Contributions**
@@ -22,6 +24,20 @@ This research addresses the gaps identified through the following contributions:
 With these contributions, our research aims to make posture monitoring accessible and practical for a broad audience, promoting better sitting habits and reducing posture-related health issues around the world.
 
 ## **II. Codes explanation**
+
+### 1. Libraries used
+
+This project uses the following libraries/packages:
+1. cv2 library: for obtaining real-time input video stream from webcam and processing each frame in the video stream
+2. mediapipe library: uses Pose Landmarker Model to detect key joints coordinates to calculate feature data for SVM model
+3. win10toast library: for notifying the user when incorrect posture is detected
+4. joblib library: for saving and loading the trained SVM model as a .pkl file
+5. numpy library: for handling SVM input vectors
+6. os library: for navigating and making changes in directory (combine files, etc)
+
+### 2. Program files
+
+
 
 
 
